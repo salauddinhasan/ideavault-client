@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function IdeaCard({ idea }) {
-  // মঙ্গোডিবির লাইভ ফিল্ডগুলো ডিস্ট্রাকচার করে ব্যাকআপ ভ্যালু সেট করে রাখলাম
   const {
     _id,
     title,

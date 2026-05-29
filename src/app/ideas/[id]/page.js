@@ -82,10 +82,7 @@ export default function IdeaDetailsPage() {
           {/* LEFT SIDE: IMAGE */}
           <div className="w-full h-64 sm:h-72 md:h-80 overflow-hidden relative bg-slate-950 rounded-xl border border-slate-800/60">
             <Image
-              src={
-                idea.imageUrl ||
-                "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80"
-              }
+              src={idea.imageUrl}
               alt={idea.title}
               width={600}
               height={400}

@@ -39,7 +39,7 @@ export default function HowItWorks() {
     <section className="w-full bg-slate-900 py-16 lg:py-24 border-b border-slate-800 relative">
       <div className="max-w-7xl mx-auto px-6">
         {/* SECTION HEADER */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <div className=" max-w-2xl mb-12 space-y-3">
           <div className="inline-flex items-center gap-1.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             Workflow Guide
           </div>

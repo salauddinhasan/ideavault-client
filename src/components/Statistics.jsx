@@ -3,7 +3,6 @@ import React from "react";
 import { FaLightbulb, FaUsers, FaHandshake, FaAward } from "react-icons/fa";
 
 export default function Statistics() {
-  // ডেমো স্ট্যাটস ডেটা (পরবর্তীতে মঙ্গোডিবি কাউন্ট এপিআই দিয়ে ডাইনামিক করতে পারবে)
   const stats = [
     {
       id: 1,
@@ -40,29 +39,20 @@ export default function Statistics() {
   ];
 
   return (
-    <section className="w-full bg-slate-900 py-16 lg:py-24 border-b border-slate-800">
+    <section className="w-full bg-slate-900 pb-20 pt-8 border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-6">
-        
-        {/* HEADER */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Our Platform <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">By The Numbers</span>
-          </h2>
-          <p className="text-slate-400 text-sm sm:text-base">
-            Tracking the growth, interactions, and milestones of a decentralized ecosystem driving future technology concepts.
-          </p>
-        </div>
-
         {/* STATS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat) => (
-            <div 
-              key={stat.id} 
+            <div
+              key={stat.id}
               className="group bg-slate-950/40 border border-slate-800 hover:border-slate-700 p-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between"
             >
-              <div className="space-y-4">
+              <div className="space-y-4   ">
                 {/* ICON BOX */}
-                <div className={`w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-xl transition-colors duration-300 ${stat.bg}`}>
+                <div
+                  className={`w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-xl transition-colors duration-300  ${stat.bg}`}
+                >
                   {stat.icon}
                 </div>
                 {/* COUNT */}
@@ -81,7 +71,6 @@ export default function Statistics() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
