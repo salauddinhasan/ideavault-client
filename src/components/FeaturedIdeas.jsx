@@ -2,22 +2,21 @@
 import React, { useState, useEffect } from "react";
 import { FaSpinner, FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
-import IdeaCard from "./IdeaCard"; // তোমার আগের বানানো IdeaCard
+import IdeaCard from "./IdeaCard";  
 
 export default function FeaturedIdeas() {
   const [ideas, setIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/ideas")
+    fetch("http://localhost:5000/featured-ideas")
       .then((res) => res.json())
       .then((data) => {
-        // বস, এখানে ৩ এর জায়গায় ৪ টা আইডিয়া স্লাইস করে নিলাম
         setIdeas(data.slice(0, 4));
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Featured ideas fetch error:", err);
+        console.error("Featured ideas fetch error:");
         setLoading(false);
       });
   }, []);
