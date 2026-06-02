@@ -1,20 +1,60 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import React, { useState } from "react";
 import { FaEnvelope, FaLock, FaUser, FaSpinner } from "react-icons/fa";
+import { toast, Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-export default function AuthPage() {
+export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    setTimeout(() => setLoading(false), 1500);
+    const authMethod = isLogin
+      ? authClient.signIn.email
+      : authClient.signUp.email;
+
+    const { data, error } = await authMethod({
+      email: formData.email,
+      password: formData.password,
+      name: !isLogin ? formData.name : undefined,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      toast.error( "Something went wrong! Please try again.");
+    } else {
+      toast.success(
+        isLogin
+          ? "Welcome back! Logging in..."
+          : "Account created successfully!",
+      );
+
+      setTimeout(() => {
+        router.push("/");
+        router.refresh();
+      }, 1000);
+    }
   };
 
   return (
     <div className="w-full bg-slate-900 min-h-screen flex items-center justify-center px-4">
+      <Toaster position="top-center" reverseOrder={false} />
+
       <div className="w-full max-w-sm bg-slate-950/50 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
         {/* HEADER */}
         <div className="text-center space-y-1">
@@ -40,6 +80,9 @@ export default function AuthPage() {
                 <FaUser className="absolute left-3 text-slate-600 text-xs" />
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   required
                   placeholder="John Doe"
                   className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-800 focus:border-blue-500/50 rounded-xl text-sm text-slate-200 outline-none transition-colors"
@@ -57,6 +100,9 @@ export default function AuthPage() {
               <FaEnvelope className="absolute left-3 text-slate-600 text-xs" />
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 required
                 placeholder="name@domain.com"
                 className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-800 focus:border-blue-500/50 rounded-xl text-sm text-slate-200 outline-none transition-colors"
@@ -73,6 +119,9 @@ export default function AuthPage() {
               <FaLock className="absolute left-3 text-slate-600 text-xs" />
               <input
                 type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 required
                 placeholder="••••••••"
                 className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-800 focus:border-blue-500/50 rounded-xl text-sm text-slate-200 outline-none transition-colors"
@@ -99,7 +148,11 @@ export default function AuthPage() {
         {/* TOGGLE LINK */}
         <div className="text-center">
           <button
-            onClick={() => setIsLogin(!isLogin)}
+            type="button"
+            onClick={() => {
+              setIsLogin(!isLogin);
+              setFormData({ name: "", email: "", password: "" });
+            }}
             className="text-xs font-medium text-blue-400 hover:underline"
           >
             {isLogin

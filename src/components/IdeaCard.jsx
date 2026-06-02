@@ -20,15 +20,15 @@ export default function IdeaCard({ idea }) {
   return (
     <div className="bg-slate-950/50 border border-slate-800 hover:border-slate-700 rounded-2xl transition-all duration-300 flex flex-col justify-between group overflow-hidden shadow-xl">
       <div>
-        {/* IDEA IMAGE */}
         <div className="w-full h-48 overflow-hidden relative bg-slate-900 border-b border-slate-800">
           <Image
             src={imageUrl}
-            width={300}
-            height={300}
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
+
           {/* CATEGORY BADGE ON IMAGE */}
           <span className="absolute top-4 left-4 text-[10px] font-bold tracking-wider uppercase text-blue-400 bg-slate-950/80 border border-blue-500/30 px-2.5 py-1 rounded-md backdrop-blur-sm">
             {category || "General"}
